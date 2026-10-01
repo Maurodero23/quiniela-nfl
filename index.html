@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Quiniela NFL</title>
+<meta name="description" content="Pick the winner and the margin for every NFL game. Live scores and live standings.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cellipse cx='32' cy='32' rx='28' ry='17' transform='rotate(-35 32 32)' fill='%2313233a'/%3E%3Cpath d='M22 42 42 22M27 31l6 6M31 27l6 6M23 35l6 6' stroke='%23fff' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@700;800;900&family=Barlow:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <header class="board" aria-live="polite">
+    <div>
+      <div class="wk" id="wkLabel">NFL</div>
+      <h1>Quiniela NFL</h1>
+    </div>
+    <div class="dl" id="deadline"><small>Next deadline</small><b class="num">—</b><span>Sign in to see this week</span></div>
+    <div class="sel" id="weekRow" hidden><label for="weekSel">Week</label><select id="weekSel"></select><span id="updated"></span></div>
+  </header>
+
+  <div class="acct" id="acct" hidden></div>
+
+  <nav class="tabs" role="tablist" id="tabs" hidden>
+    <button role="tab" id="tab-card" aria-selected="true">My card</button>
+    <button role="tab" id="tab-games" aria-selected="false">Games</button>
+    <button role="tab" id="tab-stand" aria-selected="false">Standings</button>
+    <button role="tab" id="tab-admin" aria-selected="false" hidden>Admin</button>
+  </nav>
+
+  <main id="view" class="panel">
+    <div class="empty"><b>Loading</b>Connecting to the pool…</div>
+  </main>
+
+  <details class="rules">
+    <summary>How the pool works</summary>
+    <p>For every game, pick the winner and by how many points they win.</p>
+    <table><tbody>
+      <tr><td>Correct winner, exact margin</td><td class="r num">11</td></tr>
+      <tr><td>Correct winner, margin off by 1–3</td><td class="r num">9</td></tr>
+      <tr><td>Correct winner, margin off by 4–7</td><td class="r num">8</td></tr>
+      <tr><td>Correct winner, margin off by more than 7</td><td class="r num">6</td></tr>
+      <tr><td>Wrong winner (or a tie)</td><td class="r num">0</td></tr>
+    </tbody></table>
+    <p>Example: Jets 27, Buccaneers 40. "Tampa Bay by 13" earns 11; by 10–16 earns 9; by 6–9 or 17–20 earns 8; by 5 or less or more than 20 earns 6; any Jets pick earns 0.</p>
+    <p><b>Deadlines (Mexico City time).</b> Turn in your card before the first kickoff of the week (usually Thursday night). Each game locks at its kickoff. You can change Sunday and Monday picks until Saturday at 11:59 PM, after the Friday injury reports. Everyone's picks for a game become visible once it locks. If you miss the first kickoff you sit out that week.</p>
+  </details>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
+<script src="config.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
