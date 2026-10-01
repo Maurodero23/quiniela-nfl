@@ -1,10 +1,10 @@
 <!doctype html>
-<html lang="en">
+<html lang="es-MX">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Quiniela NFL</title>
-<meta name="description" content="Pick the winner and the margin for every NFL game. Live scores and live standings.">
+<meta name="description" content="Pronostica el ganador y la diferencia de cada partido de la NFL. Marcadores y tabla en vivo.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cellipse cx='32' cy='32' rx='28' ry='17' transform='rotate(-35 32 32)' fill='%2313233a'/%3E%3Cpath d='M22 42 42 22M27 31l6 6M31 27l6 6M23 35l6 6' stroke='%23fff' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -18,35 +18,65 @@
       <div class="wk" id="wkLabel">NFL</div>
       <h1>Quiniela NFL</h1>
     </div>
-    <div class="dl" id="deadline"><small>Next deadline</small><b class="num">—</b><span>Sign in to see this week</span></div>
-    <div class="sel" id="weekRow" hidden><label for="weekSel">Week</label><select id="weekSel"></select><span id="updated"></span></div>
+    <div class="dl" id="deadline"><small>Próximo cierre</small><b class="num">—</b><span>Inicia sesión para ver la semana</span></div>
+    <div class="sel" id="weekRow" hidden><label for="weekSel">Semana</label><select id="weekSel"></select><span id="updated"></span></div>
   </header>
 
   <div class="acct" id="acct" hidden></div>
 
   <nav class="tabs" role="tablist" id="tabs" hidden>
-    <button role="tab" id="tab-card" aria-selected="true">My card</button>
-    <button role="tab" id="tab-games" aria-selected="false">Games</button>
-    <button role="tab" id="tab-stand" aria-selected="false">Standings</button>
+    <button role="tab" id="tab-home" aria-selected="true">Inicio</button>
+    <button role="tab" id="tab-card" aria-selected="false">Mi quiniela</button>
+    <button role="tab" id="tab-games" aria-selected="false">Partidos</button>
+    <button role="tab" id="tab-stand" aria-selected="false">Tabla</button>
+    <button role="tab" id="tab-playoffs" aria-selected="false">Playoffs</button>
+    <button role="tab" id="tab-rules" aria-selected="false">Instrucciones</button>
     <button role="tab" id="tab-admin" aria-selected="false" hidden>Admin</button>
   </nav>
 
   <main id="view" class="panel">
-    <div class="empty"><b>Loading</b>Connecting to the pool…</div>
+    <div class="empty"><b>Cargando</b>Conectando con la quiniela…</div>
   </main>
 
-  <details class="rules">
-    <summary>How the pool works</summary>
-    <p>For every game, pick the winner and by how many points they win.</p>
-    <table><tbody>
-      <tr><td>Correct winner, exact margin</td><td class="r num">11</td></tr>
-      <tr><td>Correct winner, margin off by 1–3</td><td class="r num">9</td></tr>
-      <tr><td>Correct winner, margin off by 4–7</td><td class="r num">8</td></tr>
-      <tr><td>Correct winner, margin off by more than 7</td><td class="r num">6</td></tr>
-      <tr><td>Wrong winner (or a tie)</td><td class="r num">0</td></tr>
-    </tbody></table>
-    <p>Example: Jets 27, Buccaneers 40. "Tampa Bay by 13" earns 11; by 10–16 earns 9; by 6–9 or 17–20 earns 8; by 5 or less or more than 20 earns 6; any Jets pick earns 0.</p>
-    <p><b>Deadlines (Mexico City time).</b> Turn in your card before the first kickoff of the week (usually Thursday night). Each game locks at its kickoff. You can change Sunday and Monday picks until Saturday at 11:59 PM, after the Friday injury reports. Everyone's picks for a game become visible once it locks. If you miss the first kickoff you sit out that week.</p>
+  <details class="rules" id="rulesBox">
+    <summary>Instrucciones</summary>
+    <div id="rulesContent" class="rulesbody">
+      <div class="pilot"><b>Temporada piloto 2026.</b> Esta temporada es una prueba para la quiniela formal del próximo año. Todas las sugerencias son bienvenidas: reglas, puntos, premios o diseño. Al final de esta página hay un buzón para mandarlas.</div>
+      <div class="prize"><span class="prizeicon">🍽️</span><div><b>Premio de la temporada piloto:</b> el campeón de la temporada (más puntos sumando todas las semanas y los playoffs) se lleva una cena en Fishers o en un lugar similar.</div></div>
+      <h3>Paso a paso</h3>
+      <ol class="steps">
+        <li><b>Crea tu cuenta.</b> Toca <i>Crear cuenta</i> y escribe tu apodo, correo, celular y una contraseña. Tu apodo es lo que todos ven en la tabla; tu correo y celular solo los ve el organizador.</li>
+        <li><b>Llena tu quiniela.</b> En <i>Mi quiniela</i>, para cada partido elige al equipo que crees que gana y escribe <b>por cuántos puntos</b> gana. Toca <i>Guardar</i>.</li>
+        <li><b>Cada partido cierra cuando empieza.</b> El del jueves cierra a su hora de inicio. Si no alcanzaste a pronosticar el jueves, <b>todavía puedes pronosticar domingo y lunes</b>.</li>
+        <li><b>Ajusta después del reporte de lesionados.</b> Los partidos de domingo y lunes los puedes llenar o cambiar hasta el <b>sábado a las 11:59 PM</b> (hora de la Ciudad de México).</li>
+        <li><b>Sigue los partidos en vivo.</b> Los marcadores y la <i>Tabla</i> se actualizan solos cada minuto. En <i>Partidos</i> ves lo que eligió cada quien una vez que el partido cierra.</li>
+      </ol>
+      <h3>Puntos por partido</h3>
+      <table><tbody>
+        <tr><td>Ganador correcto y diferencia exacta</td><td class="r num">11</td></tr>
+        <tr><td>Ganador correcto, diferencia con 1 a 3 puntos de error</td><td class="r num">9</td></tr>
+        <tr><td>Ganador correcto, diferencia con 4 a 7 puntos de error</td><td class="r num">8</td></tr>
+        <tr><td>Ganador correcto, diferencia con más de 7 puntos de error</td><td class="r num">6</td></tr>
+        <tr><td>Ganador equivocado (o empate)</td><td class="r num">0</td></tr>
+      </tbody></table>
+      <p><b>Ejemplo:</b> Steelers 17 – Ravens 30 (Baltimore gana por 13).</p>
+      <ul>
+        <li>Baltimore por 13 (diferencia exacta) → <b>11 puntos</b></li>
+        <li>Baltimore, fallando la diferencia por 1 a 3 puntos → <b>9 puntos</b></li>
+        <li>Baltimore, fallando la diferencia por 4 a 7 puntos → <b>8 puntos</b></li>
+        <li>Baltimore, fallando la diferencia por más de 7 puntos → <b>6 puntos</b></li>
+        <li>Steelers por cualquier diferencia → <b>0 puntos</b></li>
+      </ul>
+      <h3>MVP y MP de la semana</h3>
+      <p><b>MVP</b>: quien sume más puntos en la semana (el ganador). Si hay empate, gana quien tenga más diferencias exactas (pronósticos de 11 puntos); si siguen empatados, comparten el título.</p>
+      <p><b>MP (Más Pendejo)</b>: quien sume menos puntos entre los que sí mandaron pronósticos. Quien no mande nada no puede ser MP, pero queda registrado como <b>falta</b>.</p>
+      <h3>Playoffs</h3>
+      <p>En la pestaña <i>Playoffs</i> elige los 14 equipos que crees que llegan a playoffs (7 de la AFC y 7 de la NFC) antes de la fecha de cierre. Ganas puntos por cada equipo que sí entre (el valor aparece en la pestaña). Al terminar la Semana 18 esos puntos se suman a la tabla de la temporada. La quiniela es solo de temporada regular.</p>
+      <h3>Tabla de la temporada</h3>
+      <p>Suma tus puntos de todas las semanas más tus puntos de playoffs. La columna <b>Faltas</b> cuenta las semanas en las que no mandaste ningún pronóstico.</p>
+      <h3>Correos</h3>
+      <p>Te llega un recordatorio el día del primer partido (unas 6 horas antes) y otro el sábado a mediodía antes del cierre. El lunes, al terminar el último partido, todos reciben el resumen: MVP, MP, quién no mandó pronósticos y la tabla.</p>
+    </div>
   </details>
 </div>
 

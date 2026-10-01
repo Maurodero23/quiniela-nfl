@@ -44,8 +44,8 @@ button{cursor:pointer}
 @media (max-width:520px){.board{grid-template-columns:1fr}.board .dl{text-align:left}}
 
 /* tabs */
-.tabs{display:flex;gap:4px;border-bottom:2px solid var(--line);overflow-x:auto}
-.tabs button{background:none;border:0;border-bottom:3px solid transparent;margin-bottom:-2px;padding:8px 14px;font-family:var(--f-display);font-weight:800;font-size:19px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
+.tabs{display:flex;flex-wrap:wrap;gap:0 4px;border-bottom:2px solid var(--line)}
+.tabs button{background:none;border:0;border-bottom:3px solid transparent;margin-bottom:-2px;padding:8px 14px;font-family:var(--f-display);font-weight:800;font-size:18px;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
 .tabs button[aria-selected="true"]{color:var(--ink);border-bottom-color:var(--accent)}
 
 .panel{display:flex;flex-direction:column;gap:12px}
@@ -150,3 +150,69 @@ tr.me td{background:var(--accent-soft)}
   .btn{padding:10px 14px}
   .gmeta .score{width:100%;text-align:left}
 }
+
+/* rules */
+.rulesbody{display:grid;gap:8px;max-width:68ch}
+.rulesbody h3{margin:12px 0 0;font-family:var(--f-display);font-size:20px;letter-spacing:.03em;text-transform:uppercase}
+.rulesbody p,.rulesbody ul,.rulesbody ol{margin:0}
+.rulesbody ul,.rulesbody ol{padding-left:22px;display:grid;gap:6px}
+.rulesbody table{margin:4px 0}
+.rulespanel{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:16px 18px}
+.firsttime{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+
+@media (max-width:560px){
+  .tabs{flex-wrap:wrap;gap:0}
+  .tabs button{font-size:15px;padding:8px 9px}
+}
+
+/* playoffs */
+.pobox{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:12px 14px;display:grid;gap:10px}
+.poconf{margin:0;font-family:var(--f-display);font-size:22px;letter-spacing:.04em;text-transform:uppercase}
+.pogrid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.podiv{display:grid;gap:6px;align-content:start;min-width:0}
+.podiv small{font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.poteam{justify-content:flex-start}
+.poteam.made{box-shadow:inset 3px 0 0 var(--good)}
+.poteam.out{opacity:.55}
+.pochamp{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:12px 14px}
+.pochamp label{font-weight:600}
+.pochamp select{border:1px solid var(--line);background:var(--bg);border-radius:4px;padding:7px 8px;min-width:0;max-width:100%}
+.poteams{display:flex;flex-wrap:wrap;gap:4px;min-width:220px}
+.pot{font-family:var(--f-data);font-size:12px;padding:1px 6px;border-radius:3px;background:var(--sunken)}
+.pot.made{background:var(--accent-soft);color:var(--good)}
+.pot.out{text-decoration:line-through;color:var(--muted)}
+.pochecks{display:grid;grid-template-columns:repeat(auto-fill,minmax(70px,1fr));gap:6px}
+.pocheck{font-family:var(--f-data);font-size:13px;display:flex;align-items:center;gap:4px}
+td.miss{color:var(--bad);font-weight:600}
+.admin .row .field{flex:1;min-width:140px}
+@media (max-width:560px){ .pogrid{grid-template-columns:repeat(2,minmax(0,1fr))} }
+.admin .row{align-items:end}
+@media (min-width:561px){ .tabs button{font-size:17px;padding:8px 11px} }
+
+/* team logos: on a white disc so dark logos stay visible in dark mode */
+.logo{width:28px;height:28px;flex:none;border-radius:50%;background:#ffffff;padding:2px;object-fit:contain;box-shadow:0 0 0 1px var(--line)}
+.team{gap:7px}
+.poteam .logo{width:24px;height:24px}
+@media (max-width:560px){ .logo{width:24px;height:24px} .team .nm{max-width:72px} }
+
+/* home + pilot + suggestions */
+.hero{display:grid;gap:6px}
+.hero h2{margin:0;font-family:var(--f-display);font-size:30px;line-height:1;text-transform:uppercase;letter-spacing:.02em;text-wrap:balance}
+.hero p{margin:0;max-width:62ch}
+.pilot{background:var(--live-soft);border-left:4px solid var(--live);border-radius:4px;padding:10px 14px;font-size:14px}
+.homegrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:12px}
+.hcard{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px 16px;display:flex;flex-direction:column;gap:6px;align-items:flex-start;min-width:0}
+.hcard small{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:600}
+.hcard p{margin:0}
+.hcard .big{font-family:var(--f-display);font-weight:900;font-size:36px;line-height:1}
+.hcard .btn{margin-top:auto}
+.mini{margin:0;padding-left:20px;display:grid;gap:4px;width:100%}
+.mini li span{display:inline-block;min-width:60%}
+.mini li.me{font-weight:700;color:var(--accent)}
+.sug{border-top:1px solid var(--line);padding-top:8px}
+.sug p{margin:4px 0 0;white-space:pre-wrap}
+textarea{font:inherit;color:inherit;border:1px solid var(--line);background:var(--bg);border-radius:4px;padding:9px 10px;width:100%;resize:vertical}
+
+.prize{display:flex;gap:10px;align-items:center;background:var(--accent-soft);border-left:4px solid var(--accent);border-radius:4px;padding:10px 14px;font-size:14px;margin:0}
+.prizeicon{font-size:22px;line-height:1}
+@media (min-width:700px){ .homegrid.n4{grid-template-columns:repeat(2,minmax(0,1fr))} .homegrid.n3{grid-template-columns:repeat(3,minmax(0,1fr))} }
